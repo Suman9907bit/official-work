@@ -2,231 +2,196 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Computer Centre | Admin Panel</title>
+<title>Institute Office Panel Login</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 <style>
-:root{
-  --primary:#0f4c75;
-  --secondary:#3282b8;
-  --accent:#00b4d8;
-  --bg:#f1f5f9;
-  --white:#ffffff;
-  --dark:#1e293b;
-}
-
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family: "Segoe UI", system-ui;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI, sans-serif;
 }
-
 body{
-  background:var(--bg);
-  display:flex;
-  min-height:100vh;
+    background:#f2f6fc;
 }
 
-/* ===== SIDEBAR ===== */
-.sidebar{
-  width:260px;
-  background:linear-gradient(180deg,var(--primary),var(--dark));
-  color:#fff;
-  padding:20px;
-  position:fixed;
-  height:100%;
-}
-
-.logo{
-  text-align:center;
-  margin-bottom:25px;
-}
-.logo h2{
-  font-size:20px;
-  letter-spacing:1px;
-}
-.logo span{
-  font-size:12px;
-  opacity:0.8;
-}
-
-.menu{
-  list-style:none;
-}
-
-.menu li{
-  padding:13px 15px;
-  margin-bottom:10px;
-  background:rgba(255,255,255,0.08);
-  border-radius:8px;
-  cursor:pointer;
-  transition:0.3s;
-}
-
-.menu li:hover{
-  background:var(--accent);
-  color:#000;
-  transform:translateX(5px);
-}
-
-.menu .logout{
-  background:#dc2626;
-  text-align:center;
-}
-
-/* ===== MAIN ===== */
-.main{
-  margin-left:260px;
-  width:100%;
-  padding:25px;
-  animation:fade 0.6s ease;
-}
-
-/* Topbar */
-.topbar{
-  background:var(--white);
-  padding:18px 22px;
-  border-radius:14px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  box-shadow:0 10px 25px rgba(0,0,0,0.08);
-}
-
-.topbar h1{
-  font-size:22px;
-  color:var(--dark);
-}
-
-.time{
-  font-size:14px;
-  color:#555;
-}
-
-/* Cards */
-.cards{
-  margin-top:30px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-  gap:22px;
-}
-
-.card{
-  background:var(--white);
-  padding:28px;
-  border-radius:18px;
-  text-align:center;
-  box-shadow:0 12px 30px rgba(0,0,0,0.08);
-  cursor:pointer;
-  transition:0.4s;
-  position:relative;
-  overflow:hidden;
-}
-
-.card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(135deg,var(--secondary),var(--accent));
-  opacity:0;
-  transition:0.4s;
-  z-index:0;
-}
-
-.card:hover::before{
-  opacity:1;
-}
-
-.card:hover{
-  transform:translateY(-10px) scale(1.02);
-}
-
-.card h3{
-  position:relative;
-  z-index:1;
-  color:var(--dark);
-  font-size:18px;
-}
-
-.card:hover h3{
-  color:#fff;
-}
-
-/* Animation */
-@keyframes fade{
-  from{opacity:0; transform:translateY(20px);}
-  to{opacity:1; transform:translateY(0);}
-}
-
-/* ===== RESPONSIVE ===== */
-@media(max-width:768px){
-  .sidebar{
-    position:relative;
+/* ===== LOGIN ===== */
+.login-box{
     width:100%;
-    height:auto;
-  }
-  .main{
-    margin-left:0;
-  }
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.login{
+    background:#fff;
+    padding:35px;
+    width:320px;
+    border-radius:12px;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+.login h2{
+    text-align:center;
+    margin-bottom:20px;
+    color:#0b3c8a;
+}
+.login input{
+    width:100%;
+    padding:12px;
+    margin-bottom:15px;
+    border:1px solid #ccc;
+    border-radius:6px;
+}
+.login button{
+    width:100%;
+    padding:12px;
+    border:none;
+    background:#0b3c8a;
+    color:white;
+    font-size:16px;
+    border-radius:6px;
+    cursor:pointer;
+}
+.login button:hover{
+    background:#092e68;
+}
+.error{
+    color:red;
+    font-size:14px;
+    text-align:center;
+    display:none;
+}
+
+/* ===== PANEL ===== */
+header{
+    background:#0b3c8a;
+    color:white;
+    padding:15px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.container{
+    display:flex;
+}
+.sidebar{
+    width:230px;
+    background:#102a43;
+    min-height:100vh;
+}
+.sidebar a{
+    display:flex;
+    align-items:center;
+    padding:14px 20px;
+    color:#d9e2ec;
+    text-decoration:none;
+}
+.sidebar a i{width:25px;}
+.sidebar a:hover{
+    background:#1f4d8c;
+    color:#fff;
+}
+.main{
+    flex:1;
+    padding:25px;
+}
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+.card{
+    background:#fff;
+    padding:22px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+.card i{
+    font-size:32px;
+    color:#0b3c8a;
+}
+.card h3{margin:10px 0 5px;}
+
+@media(max-width:768px){
+    .container{flex-direction:column;}
+    .sidebar{width:100%;display:flex;overflow-x:auto;}
+    .sidebar a{flex-direction:column;font-size:12px;}
 }
 </style>
 </head>
 
 <body>
 
-<!-- SIDEBAR -->
-<div class="sidebar">
-  <div class="logo">
-    <h2>COMPUTER CENTRE</h2>
-    <span>Official Admin Panel</span>
-  </div>
-
-  <ul class="menu">
-    <li onclick="openPage('Dashboard')">Dashboard</li>
-    <li onclick="openPage('Student Data')">Student Data</li>
-    <li onclick="openPage('New Admission')">New Admission</li>
-    <li onclick="openPage('Certificate')">Certificate</li>
-    <li onclick="openPage('Admit Card')">Admit Card</li>
-    <li onclick="openPage('Identity Card')">Identity Card</li>
-    <li onclick="openPage('Fees & Payment')">Fees / Payment</li>
-    <li onclick="openPage('Reports')">Reports</li>
-    <li onclick="openPage('Settings')">Settings</li>
-    <li class="logout">Logout</li>
-  </ul>
+<!-- LOGIN -->
+<div class="login-box" id="loginBox">
+    <div class="login">
+        <h2>Admin Login</h2>
+        <input type="text" id="userid" placeholder="User ID">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+        <div class="error" id="error">Wrong ID or Password</div>
+    </div>
 </div>
 
-<!-- MAIN -->
-<div class="main">
-  <div class="topbar">
-    <h1 id="pageTitle">Dashboard</h1>
-    <div class="time" id="time"></div>
-  </div>
+<!-- PANEL -->
+<div id="panel" style="display:none;">
+<header>
+    <h2>Institute Office Panel</h2>
+    <button onclick="logout()" style="background:red;border:none;color:#fff;padding:6px 12px;border-radius:4px;">Logout</button>
+</header>
 
-  <div class="cards">
-    <div class="card" onclick="openPage('Student Data')"><h3>Student Data</h3></div>
-    <div class="card" onclick="openPage('Admission')"><h3>Admission</h3></div>
-    <div class="card" onclick="openPage('Certificate')"><h3>Certificate</h3></div>
-    <div class="card" onclick="openPage('Admit Card')"><h3>Admit Card</h3></div>
-    <div class="card" onclick="openPage('ID Card')"><h3>ID Card</h3></div>
-    <div class="card" onclick="openPage('Fees')"><h3>Fees / Payment</h3></div>
-    <div class="card" onclick="openPage('Reports')"><h3>Reports</h3></div>
-    <div class="card" onclick="openPage('Settings')"><h3>Settings</h3></div>
-  </div>
+<div class="container">
+    <div class="sidebar">
+        <a href="#"><i class="fa-solid fa-user-graduate"></i> Student Data</a>
+        <a href="#"><i class="fa-solid fa-file-circle-plus"></i> Admission</a>
+        <a href="#"><i class="fa-solid fa-certificate"></i> Certificate</a>
+        <a href="#"><i class="fa-solid fa-id-card"></i> ID Card</a>
+        <a href="#"><i class="fa-solid fa-money-bill"></i> Fees</a>
+        <a href="#"><i class="fa-solid fa-chart-line"></i> Reports</a>
+    </div>
+
+    <div class="main">
+        <div class="cards">
+            <div class="card">
+                <i class="fa-solid fa-user-graduate"></i>
+                <h3>Students</h3>
+                <p>Manage records</p>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-file-circle-plus"></i>
+                <h3>Admission</h3>
+                <p>New admission</p>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-certificate"></i>
+                <h3>Certificate</h3>
+                <p>Generate</p>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 
 <script>
-function openPage(name){
-  document.getElementById("pageTitle").innerText = name;
+function login(){
+    let id = document.getElementById("userid").value;
+    let pass = document.getElementById("password").value;
+
+    if(id === "admin" && pass === "1234"){
+        document.getElementById("loginBox").style.display="none";
+        document.getElementById("panel").style.display="block";
+    }else{
+        document.getElementById("error").style.display="block";
+    }
 }
 
-function updateTime(){
-  const now = new Date();
-  document.getElementById("time").innerText =
-    now.toLocaleDateString() + " | " + now.toLocaleTimeString();
+function logout(){
+    location.reload();
 }
-setInterval(updateTime,1000);
-updateTime();
 </script>
 
 </body>
