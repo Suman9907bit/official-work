@@ -25,7 +25,7 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-    background: url('https://i.pinimg.com/736x/01/5f/5c/015f5c992bd07e72a5654a626e3083a9.jpg') no-repeat center center;
+    background:url('https://i.pinimg.com/736x/70/42/e9/7042e99da611c8dab433bc41eef14df6.jpg') no-repeat center center;
     background-size:cover;
 }
 .login{
@@ -58,9 +58,7 @@ body{
     border-radius:6px;
     cursor:pointer;
 }
-.login button:hover{
-    background:#092e68;
-}
+.login button:hover{background:#092e68;}
 .error{
     color:red;
     font-size:14px;
@@ -94,11 +92,9 @@ header{
     padding:14px 20px;
     color:#d9e2ec;
     text-decoration:none;
-    transition:.3s;
+    cursor:pointer;
 }
-.sidebar a i{
-    width:25px;
-}
+.sidebar a i{width:25px;}
 .sidebar a:hover{
     background:#1f4d8c;
     color:#fff;
@@ -107,44 +103,34 @@ header{
 /* Main */
 .main{
     flex:1;
-    padding:25px;
+    padding:15px;
 }
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
-}
-.card{
+
+/* iframe area */
+.iframe-box{
+    width:100%;
+    height:calc(100vh - 90px);
     background:#fff;
-    padding:22px;
-    border-radius:12px;
+    border-radius:10px;
     box-shadow:0 5px 15px rgba(0,0,0,.08);
-    transition:.3s;
+    overflow:hidden;
 }
-.card:hover{
-    transform:translateY(-5px);
-}
-.card i{
-    font-size:32px;
-    color:#0b3c8a;
-}
-.card h3{
-    margin:10px 0 5px;
+.iframe-box iframe{
+    width:100%;
+    height:100%;
+    border:none;
 }
 
-/* ===== MOBILE RESPONSIVE PANEL ===== */
+/* ===== MOBILE ===== */
 @media(max-width:768px){
-
     header{
         flex-direction:column;
         gap:10px;
         text-align:center;
     }
-
     .container{
         flex-direction:column;
     }
-
     .sidebar{
         width:100%;
         min-height:auto;
@@ -152,27 +138,20 @@ header{
         justify-content:space-around;
         overflow-x:auto;
     }
-
     .sidebar a{
         flex-direction:column;
-        padding:10px;
         font-size:12px;
+        padding:10px;
         text-align:center;
         flex:0 0 auto;
     }
-
     .sidebar a i{
         width:auto;
         font-size:18px;
         margin-bottom:4px;
     }
-
-    .main{
-        padding:15px;
-    }
-
-    .cards{
-        grid-template-columns:1fr;
+    .iframe-box{
+        height:calc(100vh - 160px);
     }
 }
 </style>
@@ -200,34 +179,20 @@ header{
 
 <div class="container">
 
+    <!-- SIDEBAR -->
     <div class="sidebar">
-        <a href="#"><i class="fa-solid fa-user-graduate"></i> Student Data</a>
-        <a href="#"><i class="fa-solid fa-file-circle-plus"></i> Admission</a>
-        <a href="#"><i class="fa-solid fa-certificate"></i> Certificate</a>
-        <a href="#"><i class="fa-solid fa-id-card"></i> ID Card</a>
-        <a href="#"><i class="fa-solid fa-money-bill"></i> Fees</a>
-        <a href="#"><i class="fa-solid fa-chart-line"></i> Reports</a>
+        <a onclick="loadPage('student.html')"><i class="fa-solid fa-user-graduate"></i> Student</a>
+        <a onclick="loadPage('admission.html')"><i class="fa-solid fa-file-circle-plus"></i> Admission</a>
+        <a onclick="loadPage('certificate.html')"><i class="fa-solid fa-certificate"></i> Certificate</a>
+        <a onclick="loadPage('idcard.html')"><i class="fa-solid fa-id-card"></i> ID Card</a>
+        <a onclick="loadPage('fees.html')"><i class="fa-solid fa-money-bill"></i> Fees</a>
+        <a onclick="loadPage('reports.html')"><i class="fa-solid fa-chart-line"></i> Reports</a>
     </div>
 
+    <!-- MAIN -->
     <div class="main">
-        <div class="cards">
-            <div class="card">
-                <i class="fa-solid fa-user-graduate"></i>
-                <h3>Students</h3>
-                <p>Manage records</p>
-            </div>
-
-            <div class="card">
-                <i class="fa-solid fa-file-circle-plus"></i>
-                <h3>Admission</h3>
-                <p>New admission</p>
-            </div>
-
-            <div class="card">
-                <i class="fa-solid fa-certificate"></i>
-                <h3>Certificate</h3>
-                <p>Generate</p>
-            </div>
+        <div class="iframe-box">
+            <iframe id="mainFrame" src=""></iframe>
         </div>
     </div>
 
@@ -236,13 +201,13 @@ header{
 
 <script>
 function login(){
-    let id = document.getElementById("userid").value.trim();
-    let pass = document.getElementById("password").value.trim();
-    let error = document.getElementById("error");
+    let id=document.getElementById("userid").value.trim();
+    let pass=document.getElementById("password").value.trim();
+    let error=document.getElementById("error");
 
     error.style.display="none";
 
-    if(id === "admin" && pass === "1234"){
+    if(id==="admin" && pass==="1234"){
         document.getElementById("loginBox").style.display="none";
         document.getElementById("panel").style.display="block";
     }else{
@@ -252,6 +217,10 @@ function login(){
 
 function logout(){
     location.reload();
+}
+
+function loadPage(page){
+    document.getElementById("mainFrame").src = page;
 }
 </script>
 
