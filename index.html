@@ -25,9 +25,12 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
+    background: url('https://i.pinimg.com/736x/01/5f/5c/015f5c992bd07e72a5654a626e3083a9.jpg') no-repeat center center;
+    background-size:cover;
 }
 .login{
-    background:#fff;
+    background:rgba(255,255,255,0.93);
+    backdrop-filter:blur(5px);
     padding:35px;
     width:320px;
     border-radius:12px;
@@ -78,6 +81,8 @@ header{
 .container{
     display:flex;
 }
+
+/* Sidebar */
 .sidebar{
     width:230px;
     background:#102a43;
@@ -89,12 +94,17 @@ header{
     padding:14px 20px;
     color:#d9e2ec;
     text-decoration:none;
+    transition:.3s;
 }
-.sidebar a i{width:25px;}
+.sidebar a i{
+    width:25px;
+}
 .sidebar a:hover{
     background:#1f4d8c;
     color:#fff;
 }
+
+/* Main */
 .main{
     flex:1;
     padding:25px;
@@ -109,17 +119,61 @@ header{
     padding:22px;
     border-radius:12px;
     box-shadow:0 5px 15px rgba(0,0,0,.08);
+    transition:.3s;
+}
+.card:hover{
+    transform:translateY(-5px);
 }
 .card i{
     font-size:32px;
     color:#0b3c8a;
 }
-.card h3{margin:10px 0 5px;}
+.card h3{
+    margin:10px 0 5px;
+}
 
+/* ===== MOBILE RESPONSIVE PANEL ===== */
 @media(max-width:768px){
-    .container{flex-direction:column;}
-    .sidebar{width:100%;display:flex;overflow-x:auto;}
-    .sidebar a{flex-direction:column;font-size:12px;}
+
+    header{
+        flex-direction:column;
+        gap:10px;
+        text-align:center;
+    }
+
+    .container{
+        flex-direction:column;
+    }
+
+    .sidebar{
+        width:100%;
+        min-height:auto;
+        display:flex;
+        justify-content:space-around;
+        overflow-x:auto;
+    }
+
+    .sidebar a{
+        flex-direction:column;
+        padding:10px;
+        font-size:12px;
+        text-align:center;
+        flex:0 0 auto;
+    }
+
+    .sidebar a i{
+        width:auto;
+        font-size:18px;
+        margin-bottom:4px;
+    }
+
+    .main{
+        padding:15px;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
 }
 </style>
 </head>
@@ -141,10 +195,11 @@ header{
 <div id="panel" style="display:none;">
 <header>
     <h2>Institute Office Panel</h2>
-    <button onclick="logout()" style="background:red;border:none;color:#fff;padding:6px 12px;border-radius:4px;">Logout</button>
+    <button onclick="logout()" style="background:red;border:none;color:#fff;padding:6px 14px;border-radius:4px;">Logout</button>
 </header>
 
 <div class="container">
+
     <div class="sidebar">
         <a href="#"><i class="fa-solid fa-user-graduate"></i> Student Data</a>
         <a href="#"><i class="fa-solid fa-file-circle-plus"></i> Admission</a>
@@ -161,11 +216,13 @@ header{
                 <h3>Students</h3>
                 <p>Manage records</p>
             </div>
+
             <div class="card">
                 <i class="fa-solid fa-file-circle-plus"></i>
                 <h3>Admission</h3>
                 <p>New admission</p>
             </div>
+
             <div class="card">
                 <i class="fa-solid fa-certificate"></i>
                 <h3>Certificate</h3>
@@ -173,19 +230,23 @@ header{
             </div>
         </div>
     </div>
+
 </div>
 </div>
 
 <script>
 function login(){
-    let id = document.getElementById("userid").value;
-    let pass = document.getElementById("password").value;
+    let id = document.getElementById("userid").value.trim();
+    let pass = document.getElementById("password").value.trim();
+    let error = document.getElementById("error");
+
+    error.style.display="none";
 
     if(id === "admin" && pass === "1234"){
         document.getElementById("loginBox").style.display="none";
         document.getElementById("panel").style.display="block";
     }else{
-        document.getElementById("error").style.display="block";
+        error.style.display="block";
     }
 }
 
