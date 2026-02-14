@@ -200,29 +200,61 @@ header{
 </div>
 
 <script>
-function login(){
-    let id=document.getElementById("userid").value.trim();
-    let pass=document.getElementById("password").value.trim();
-    let error=document.getElementById("error");
+async function login(){
+
+    let id = document.getElementById("userid").value.trim();
+    let pass = document.getElementById("password").value.trim();
+    let error = document.getElementById("error");
 
     error.style.display="none";
 
-    if(id==="admin" && pass==="1234"){
-        document.getElementById("loginBox").style.display="none";
-        document.getElementById("panel").style.display="block";
-    }else{
+    if(!id || !pass){
+        error.innerText="Enter ID and Password";
         error.style.display="block";
+        return;
+    }
+
+    const baseUrl = "https://script.google.com/macros/s/AKfycbxxhw_7cAUUmU3tIgv7Ek81Mqh62Jve0s1Y3McL2-MyEHiVD7l50D2xPDAe4IJs2LGY/exec";  // এখানে তোমার /exec URL বসাও
+
+    const url = baseUrl + "?username=" + encodeURIComponent(id) + "&password=" + encodeURIComponent(pass);
+
+    try{
+        const response = await fetch(url);
+        const result = await response.text();
+
+        if(result.trim() === "success"){
+            document.getElementById("loginBox").style.display="none";
+            document.getElementById("panel").style.display="block";
+            sessionStorage.setItem("adminLoggedIn","true");
+        }else{
+            error.innerText="Wrong ID or Password";
+            error.style.display="block";
+        }
+
+    }catch(err){
+        console.error(err);
+        alert("Server Connection Failed!");
     }
 }
 
 function logout(){
+    sessionStorage.removeItem("adminLoggedIn");
     location.reload();
 }
 
 function loadPage(page){
     document.getElementById("mainFrame").src = page;
 }
+
+window.onload = function(){
+    if(sessionStorage.getItem("adminLoggedIn")==="true"){
+        document.getElementById("loginBox").style.display="none";
+        document.getElementById("panel").style.display="block";
+    }
+}
 </script>
+
+
 
 </body>
 </html>
